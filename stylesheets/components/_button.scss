@@ -1,0 +1,43 @@
+.c-btn {
+  font-size: 0.9em;
+  font-family: inherit;
+  text-transform: uppercase;
+  color: $color-white;
+  border: none;
+  padding: 0.9em 1.3em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+//.c-btn--start {
+//  background-color: $color-primary;
+//
+//  &:hover {
+//    background-color: $color-primary-lite;
+//  }
+//}
+
+.c-btn--start,
+.c-btn--pause,
+.c-btn--continue {
+  background-color: $color-primary;
+  &:hover {
+    background-color: $color-primary-dark;
+  }
+}
+
+.c-btn--hint,
+.c-btn--restart {
+  background-color: $color-secondary;
+  &:not(:disabled):hover {
+    background-color: $color-secondary-dark;
+  }
+}
+
+.c-btn--hint:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+
+

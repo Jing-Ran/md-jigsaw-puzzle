@@ -1,0 +1,17 @@
+.c-footer {
+  width: 100%;
+  //margin: 0 auto;
+  margin-top: 1em;
+  padding-top: 5em;
+  padding-bottom: 3em;
+  font-size: 0.6em;
+  font-weight: lighter;
+  color: $color-white;
+  text-align: center;
+  background-color: $color-bg;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 9em;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jigsaw Puzzle</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Josefin+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+</head>
+<body>
+  <div class="l-wrapper">
+    <header class="c-header">
+      <h1>Jigsaw Drag & Drop Puzzle</h1>
+    </header>
+
+    <div class="l-body">
+      <!-- Splash -->
+      <!--<div class="c-splash c-splash&#45;&#45;show">-->
+        <!--<img src="assets/images/_Puzzle_solved.png" alt="solved puzzle">-->
+        <!--<div class="c-splash__game&#45;&#45;level">-->
+          <!--<p class="c-splash__msg"><span>Easy Mode</span>You will have 8 minutes & 3 hints to solve the puzzle.</p>-->
+          <!--<div class="c-splash__level-control">-->
+            <!--<span>Easy</span>-->
+            <!--<label class="c-switch">-->
+              <!--<input type="checkbox" id="game-level-cb">-->
+              <!--<span class="c-switch__slider"></span>-->
+            <!--</label>-->
+            <!--<span class="c-splash__level">Hard</span>-->
+          <!--</div>-->
+          <!--<button class="c-btn c-btn&#45;&#45;start">start</button>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!-----------
+          Puzzle
+        ----------->
+      <div class="l-puzzle">
+        <div class="l-puzzle__display">
+          <img src="assets/images/_Puzzle_bg_unsolved.png" class="img--unsolved">
+          <div class="c-pieces--drop-zone">
+            <div class="c-pieces__col c-pieces__col--odd">
+              <span class="c-pieces__piece" id="piece-0-0"></span>
+              <span class="c-pieces__piece" id="piece-0-1"></span>
+              <span class="c-pieces__piece" id="piece-0-2"></span>
+              <span class="c-pieces__piece" id="piece-0-3"></span>
+              <span class="c-pieces__piece" id="piece-0-4"></span>
+            </div>
+            <div class="c-pieces__col c-pieces__col--even">
+              <span class="c-pieces__piece" id="piece-1-0"></span>
+              <span class="c-pieces__piece" id="piece-1-1"></span>
+              <span class="c-pieces__piece" id="piece-1-2"></span>
+              <span class="c-pieces__piece" id="piece-1-3"></span>
+            </div>
+            <div class="c-pieces__col c-pieces__col--odd">
+              <span class="c-pieces__piece" id="piece-2-0"></span>
+              <span class="c-pieces__piece" id="piece-2-1"></span>
+              <span class="c-pieces__piece" id="piece-2-2"></span>
+              <span class="c-pieces__piece" id="piece-2-3"></span>
+              <span class="c-pieces__piece" id="piece-2-4"></span>
+            </div>
+            <div class="c-pieces__col c-pieces__col--even">
+              <span class="c-pieces__piece" id="piece-3-0"></span>
+              <span class="c-pieces__piece" id="piece-3-1"></span>
+              <span class="c-pieces__piece" id="piece-3-2"></span>
+              <span class="c-pieces__piece" id="piece-3-3"></span>
+            </div>
+            <div class="c-pieces__col c-pieces__col--odd">
+              <span class="c-pieces__piece" id="piece-4-0"></span>
+              <span class="c-pieces__piece" id="piece-4-1"></span>
+              <span class="c-pieces__piece" id="piece-4-2"></span>
+              <span class="c-pieces__piece" id="piece-4-3"></span>
+              <span class="c-pieces__piece" id="piece-4-4"></span>
+            </div>
+            <div class="c-pieces__col c-pieces__col--even">
+              <span class="c-pieces__piece" id="piece-5-0"></span>
+              <span class="c-pieces__piece" id="piece-5-1"></span>
+              <span class="c-pieces__piece" id="piece-5-2"></span>
+              <span class="c-pieces__piece" id="piece-5-3"></span>
+            </div>
+            <div class="c-pieces__col c-pieces__col--odd">
+              <span class="c-pieces__piece" id="piece-6-0"></span>
+              <span class="c-pieces__piece" id="piece-6-1"></span>
+              <span class="c-pieces__piece" id="piece-6-2"></span>
+              <span class="c-pieces__piece" id="piece-6-3"></span>
+              <span class="c-pieces__piece" id="piece-6-4"></span>
+            </div>
+            <div class="c-pieces__col c-pieces__col--even">
+              <span class="c-pieces__piece" id="piece-7-0"></span>
+              <span class="c-pieces__piece" id="piece-7-1"></span>
+              <span class="c-pieces__piece" id="piece-7-2"></span>
+              <span class="c-pieces__piece" id="piece-7-3"></span>
+            </div>
+            <div class="c-pieces__col c-pieces__col--odd">
+              <span class="c-pieces__piece" id="piece-8-0"></span>
+              <span class="c-pieces__piece" id="piece-8-1"></span>
+              <span class="c-pieces__piece" id="piece-8-2"></span>
+              <span class="c-pieces__piece" id="piece-8-3"></span>
+              <span class="c-pieces__piece" id="piece-8-4"></span>
+            </div>
+          </div>
+          <img src="assets/images/_Puzzle_solved.png" class="img--solved">
+        </div>
+        <div class="l-puzzle__control">
+          <div class="l-timer">
+            <p>Timer</p>
+            <p class="c-countdown">08:00</p>
+          </div>
+
+          <a href="#modal--pause" class="c-btn c-btn--pause js-modal-trigger">pause</a>
+          <button class="c-btn c-btn--hint">hint<span class="hint-times">(3)</span></button>
+        </div>
+      </div>
+
+      <div class="l-pieces-storage">
+      </div>
+
+
+      <!-- Modal Overlay -->
+      <div class="c-modal-overlay"></div>
+      <!-- Modal Pause -->
+      <div id="modal--pause" class="c-modal c-modal--pause">
+        <div class="c-modal__content">
+          <p class="c-modal__body">Continue the current game or start a new one?</p>
+        </div>
+        <div class="c-modal__footer">
+          <button type="button" class="c-btn c-btn--continue js-modal-close-btn">continue</button>
+          <button type="button" class="c-btn c-btn--restart js-modal-close-btn">restart</button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <footer class="c-footer">&copy; 2017 Jing Ran</footer>
+  </div>
+
+
+  <script src="scripts/main.js"></script>
+  <script src="scripts/puzzle-pieces.js"></script>
+</body>
+</html>

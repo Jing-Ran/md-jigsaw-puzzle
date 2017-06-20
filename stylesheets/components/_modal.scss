@@ -1,0 +1,75 @@
+/* Overlay styles
+   ========================================================================== */
+
+.c-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: $color-black;
+  opacity: 0.6;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.3s;
+
+  &--show {
+    opacity: 0.6;
+  }
+}
+
+
+/* Modal styles
+   ========================================================================== */
+
+.c-modal {
+  z-index: 200;
+  position: fixed;
+  top: 30%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  opacity: 0;
+  pointer-events: none;
+  min-width: 18em;
+  width: 50%;
+  max-width: 35em;
+  min-height: 10em;
+  background-color: darken($color-white, 10%);
+
+  transition: all 0.4s;
+  transform: scale(0);
+  transition-timing-function: cubic-bezier(0.600, -0.280, 0.735, 0.045);
+
+  &__content {
+    width: 100%;
+  }
+
+  &__body {
+    margin: 0;
+    padding: 2.5em 3.5em;
+    font-size: 0.9em;
+    line-height: 2.5em;
+    background-color: darken($color-white, 10%);
+  }
+
+  &__footer {
+    width: 100%;
+    padding: 1.5em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: lighten($color-primary-lite, 7%);
+  }
+}
+
+
+/* Transition styles
+   ========================================================================== */
+// Fade in and scale down
+.c-modal-transition--scale-down {
+  opacity: 1;
+  pointer-events: all;
+  transform: scale(1);
+}

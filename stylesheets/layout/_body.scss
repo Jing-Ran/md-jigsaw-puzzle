@@ -1,0 +1,107 @@
+.l-body {
+  //border: 1px solid yellow;
+
+  position: relative;
+  font-size: inherit;
+  width: 80%;
+  margin: 0 auto;
+  //padding: 1em;
+  background-color: $color-black;
+  //overflow: hidden;
+
+  padding-bottom: 9em;
+  /* Height of the footer */
+}
+
+
+// puzzle section in general
+.l-puzzle {
+  //border: 1px solid lightblue;
+
+  position: relative;
+  display: flex;
+  //display: none;
+  justify-content: center;
+  width: 100%;
+
+  .l-puzzle__display {
+    position: relative;
+
+    img {
+      width: 868px;
+      height: 100%;
+    }
+  }
+
+  .l-puzzle__control {
+    //border: 1px solid red;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: calc(100% - 868px);
+
+    button {
+      display: block;
+    }
+
+    .c-btn--pause {
+      margin-top: 4em;
+    }
+
+    .c-btn--hint {
+      margin-top: 2em;
+    }
+  }
+}
+
+// puzzle display
+.img--solved {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: help;
+
+  visibility: hidden;
+}
+
+
+
+// countdown timer
+.l-timer {
+  color: $color-white;
+  p {
+    text-align: center;
+    margin-top: 2.5em;
+  }
+
+  .c-countdown {
+    font-size: 1.5em;
+  }
+}
+
+
+
+
+
+// puzzle pieces section
+.l-pieces-storage {
+  color: white;
+
+  border: 3px dashed $color-primary-dark;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: space-around;
+  justify-content: flex-start;
+  padding: 1em;
+
+  img {
+    margin: 0.2em;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

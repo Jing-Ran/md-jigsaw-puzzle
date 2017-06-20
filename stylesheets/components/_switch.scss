@@ -1,0 +1,46 @@
+.c-switch {
+  position: relative;
+  display: inline-block;
+  width: 3.5em;
+  height: 1.75em;
+
+  .c-switch__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 1.75em;
+    background-color: $color-white;
+    transition: background-color .4s;
+  }
+
+  .c-switch__slider::before {
+    content: '';
+    position: absolute;
+    left: 0.25em;
+    bottom: 0.25em;
+    height: 1.25em;
+    width: 1.25em;
+    border-radius: 50%;
+    background-color: $color-primary;
+    cursor: pointer;
+    transition: background-color .4s, transform 0.4s;
+  }
+
+  input {
+    display: none;
+  }
+
+  input:checked {
+    + .c-switch__slider {
+      background-color: $color-primary;
+    }
+
+    + .c-switch__slider::before {
+      background-color: $color-white;
+      transform: translateX(1.75em);
+    }
+  }
+}

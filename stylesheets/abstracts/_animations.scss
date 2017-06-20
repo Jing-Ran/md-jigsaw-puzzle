@@ -1,0 +1,12 @@
+@keyframes splashHide {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    transform: scale(0);
+    background-color: transparent;
+  }
+}

@@ -1,0 +1,80 @@
+.c-splash {
+  opacity: 0.3;
+
+  position: absolute;
+  width: 100%;
+  background-color: $color-black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: inherit;
+  overflow: hidden;
+  z-index: 100;
+
+  &--hidden {
+    animation: splashHide 0.1s forwards;
+    //display: none;
+  }
+
+  img {
+    display: block;
+    width: 70%;
+    height: auto;
+    opacity: 0.6;
+  }
+}
+
+.c-splash__game--level {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 70%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-around;
+
+  .c-splash__msg {
+    max-width: 50%;
+    height: 12em;
+    color: $color-white;
+    font-size: 0.75em;
+    text-align: center;
+    line-height: 2em;
+    margin: 0;
+
+    span {
+      display: block;
+      text-transform: uppercase;
+      color: $color-primary;
+      font-size: 1.7em;
+      line-height: 2.5em;
+    }
+  }
+
+  .c-splash__level-control {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+    > span {
+      font-size: 0.75em;
+      color: $color-white;
+      text-transform: uppercase;
+      cursor: default;
+    }
+
+    .c-switch {
+      margin: 0 1.5em;
+    }
+  }
+
+
+
+  // TODO: move button to _button file
+  .c-btn--start {
+    margin: 0;
+  }
+}
+
+
