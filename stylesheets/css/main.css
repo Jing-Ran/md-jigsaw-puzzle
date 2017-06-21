@@ -210,9 +210,9 @@ html, body {
     align-items: center;
     background-color: #f4b7c1; }
 
-.c-modal--game-over {
-  background-color: transparent;
-  color: white; }
+.c-modal--gameover .c-modal__body {
+  font-size: 1.3em;
+  text-align: center; }
 
 /* Transition styles
    ========================================================================== */

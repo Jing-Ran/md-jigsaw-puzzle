@@ -14,12 +14,15 @@
   var gameTimeEasy = 8 * 60 * 1000;
   var gameTimeHard = 4 * 60 * 1000;
   // var gameTime = gameTimeEasy;
-  var gameTime = 1.1*60*1000;
+  var gameTime = 0.1*60*1000;
   var continueBtn = document.querySelector('.c-btn--continue');
   var restartBtnPause = document.querySelector('.c-modal--pause .c-btn--restart');
   var pauseModal = document.querySelector('.c-modal--pause');
   var overlay = document.querySelector('.c-modal-overlay');
   var restartBtnGameover = document.querySelector('.c-modal--gameover .c-btn--restart');
+  var gameoverModal = document.querySelector('.c-modal--gameover');
+  var rightPieces = 0;
+
 
   // var deadline;
 
@@ -43,6 +46,8 @@
         console.log('game over');
         clearTimeout(this.timeout);
         delete this.timeout;
+
+        if (rightPieces !== 41) gameOver();
 
         return false;
       }
@@ -148,21 +153,27 @@
   }
 
 
+  function gameOver() {
+    openModal(gameoverModal);
+    // TODO: play sound
+  }
+
+
 
   /*****************************************************************************
    *                            Event Listeners
    ****************************************************************************/
 
-  // gameLevelSwitch.addEventListener('click', changeGameLevel);
-  //
-  // // startBtn.addEventListener('click', startGame);
-  // startBtn.addEventListener('click', function() {
-  //   startGame();
-  //
-  //   // start countdown timer
-  //   var deadline = new Date(Date.parse(new Date()) + gameTime);
-  //   countdownObj.start(deadline);
-  // });
+  gameLevelSwitch.addEventListener('click', changeGameLevel);
+
+  // startBtn.addEventListener('click', startGame);
+  startBtn.addEventListener('click', function() {
+    startGame();
+
+    // start countdown timer
+    var deadline = new Date(Date.parse(new Date()) + gameTime);
+    countdownObj.start(deadline);
+  });
 
   // show or hide hint img
   hintBtn.addEventListener('mousedown', function() {

@@ -65,9 +65,11 @@
 }
 
 
-.c-modal--game-over {
-  background-color: transparent;
-  color: white;
+.c-modal--gameover {
+  .c-modal__body {
+    font-size: 1.3em;
+    text-align: center;
+  }
 }
 
 
