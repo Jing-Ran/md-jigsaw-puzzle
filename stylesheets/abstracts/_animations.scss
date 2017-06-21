@@ -10,3 +10,13 @@
     background-color: transparent;
   }
 }
+
+
+@keyframes flip {
+  from {
+    transform: rotateX(0);
+  }
+  to {
+    transform: rotateX(-360deg);
+  }
+}

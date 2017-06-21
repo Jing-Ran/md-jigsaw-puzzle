@@ -65,11 +65,14 @@
 }
 
 
-.c-modal--gameover {
-  .c-modal__body {
-    font-size: 1.3em;
-    text-align: center;
-  }
+.c-modal--gameover,
+.c-modal--congrats .c-modal__body {
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.c-modal--congrats .c-modal__body {
+  color: $color-primary-dark;
 }
 
 
