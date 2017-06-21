@@ -16,9 +16,10 @@
   // var gameTime = gameTimeEasy;
   var gameTime = 1.1*60*1000;
   var continueBtn = document.querySelector('.c-btn--continue');
-  var restartBtn = document.querySelector('.c-btn--restart');
+  var restartBtnPause = document.querySelector('.c-modal--pause .c-btn--restart');
   var pauseModal = document.querySelector('.c-modal--pause');
   var overlay = document.querySelector('.c-modal-overlay');
+  var restartBtnGameover = document.querySelector('.c-modal--gameover .c-btn--restart');
 
   // var deadline;
 
@@ -184,7 +185,12 @@
     countdownObj.resume();
   });
 
-  restartBtn.addEventListener('click', function () {
+  restartBtnPause.addEventListener('click', function () {
+    // closeModal(pauseModal);
+    window.location.reload(true);
+  });
+
+  restartBtnGameover.addEventListener('click', function () {
     // closeModal(pauseModal);
     window.location.reload(true);
   });

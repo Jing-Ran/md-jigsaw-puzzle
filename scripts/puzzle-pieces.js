@@ -6,6 +6,8 @@
     '8-2', '8-3', '8-4'];
   var piecesStorage = document.querySelector('.l-pieces-storage');
   var dropZone = document.querySelector('.c-pieces--drop-zone');
+  var rightPieces = 0;
+
   var dropSpans = document.querySelectorAll('.c-pieces__piece');
 
   var pieceCols = document.querySelectorAll('.c-pieces__col'); // length = 9
@@ -62,31 +64,75 @@
     console.log('Drop ');
     // Get the data, which is the id of the DragStart target
     var targetId = e.dataTransfer.getData('text');
-    // var newPiece;
 
-    if (e.target.classList.contains('c-pieces__piece')) {
-      console.log('if' + targetId);
+    if (e.target.classList.contains('c-pieces__piece')) { // dropSpan is empty
+      console.log('drop if' + targetId);
       e.target.appendChild(document.getElementById(targetId));
-      // Clear the drag data cache (for all formats/types)
-      e.dataTransfer.clearData();
-    } else if (e.target.classList.contains('c-pieces__piece-img')) {
-      console.log('else if ' + e.target.id, e.dataTransfer.getData('text'));
+
+      // call calcRightPieces func
+      calcRightPieces(e.target, targetId);
+
+    } else if (e.target.classList.contains('c-pieces__piece-img')) { // dropSpan not empty
+      console.log('drop else if ' + e.target.id, e.dataTransfer.getData('text'));
       swapPieces(targetId, e.target);
     }
+
+    // Clear the drag data cache (for all formats/types)
+    e.dataTransfer.clearData();
   }
 
   // call this func when dropping a piece
   function swapPieces(newPieceId, oldPiece) {
     console.log('swap');
     var newPiece = document.getElementById(newPieceId);
-    oldPiece.parentNode.replaceChild(newPiece, oldPiece);
+    var dropSpan = oldPiece.parentNode;
+    dropSpan.replaceChild(newPiece, oldPiece);
     piecesStorage.appendChild(oldPiece);
+
+    // call calcRightPieces func
+    console.log('old piece id ' + oldPiece.id);
+    calcRightPieces(dropSpan, newPieceId, oldPiece.id);
   }
 
 
-  // call this func when a piece is dropped in the c-pieces__col
-  function isRightPiece() {
+  // call this func when a piece is dropped
+  function calcRightPieces(dropSpan, currentPieceId, prevPieceId) {
+    var dropSpanId = dropSpan.id.substr(-3);
 
+    console.log('rightorwrong ' + dropSpanId);
+
+    // if (dropSpan.children.length === 0) { // no piece in this dropSpan before
+    //   if (dropSpanId === currentPieceId) rightPieces++;
+    // } else { // called by swapPieces func
+    //   if (prevPieceId === dropSpanId) {
+    //     rightPieces--; // prevPiece is right, then current must be wrong
+    //   } else {
+    //     if (dropSpanId === currentPieceId) rightPieces++;
+    //   }
+    // }
+
+
+    if (dropSpanId === currentPieceId) {
+      console.log('if right++ ');
+      rightPieces++;
+    }
+    else {
+      console.log('else ');
+      if (prevPieceId === dropSpanId) {
+        console.log('else right-- ');
+        rightPieces--;
+      }
+    }
+    console.log('right number ' + rightPieces);
+
+    // pieces === 41 && nothing in storage area
+    if (rightPieces === 41) {
+      console.log('ALL are right');
+      dropZone.style.pointerEvents = 'none';
+
+      // TODO: add congratulations
+      // TODO: disable all buttons (may achieve thru congrats modal)
+    }
   }
 
   // TODO: start button call this func
