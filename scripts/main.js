@@ -14,7 +14,7 @@
   var gameTimeEasy = 8 * 60 * 1000;
   var gameTimeHard = 4 * 60 * 1000;
   var gameTime = gameTimeEasy;
-  // var gameTime = 0.5*60*1000;
+  // var gameTime = 0.1*60*1000;
   var continueBtn = document.querySelector('.c-btn--continue');
   var restartBtnPause = document.querySelector('.c-modal--pause .c-btn--restart');
   var pauseModal = document.querySelector('.c-modal--pause');
@@ -137,48 +137,18 @@
     }
   }
 
-  // Countdown method 1:
-  // function getTimeLeft(endtime) {
-  //   var time = Date.parse(endtime) - Date.parse(new Date());
-  //   var sec = Math.floor((time/1000) % 60);
-  //   var min = Math.floor((time/1000/60) % 60);
-  //
-  //   return {
-  //     totalLeft: time,
-  //     minutes: min,
-  //     seconds: sec
-  //   };
-  // }
-  //
-  // function countdown(endtime) {
-  //   var timeInterval = setInterval(function() {
-  //     var timeLeft = getTimeLeft(endtime);
-  //     countdownTimer.innerHTML = ('0' + timeLeft.minutes).slice(-2) + ':' +
-  //       ('0' + timeLeft.seconds).slice(-2);
-  //
-  //     // 1 min left - change to warning color
-  //     if (timeLeft.totalLeft <= 60000) countdownTimer.style.color = 'red';
-  //
-  //     if (timeLeft.totalLeft <= 0) {
-  //       console.log('if ');
-  //       clearInterval(timeInterval);
-  //
-  //       //TODO: call reset function
-  //     }
-  //   }, 1000);
-  // }
-
-
 
   function gameOver() {
+    var gameoverSound = new Audio('assets/sound/gameover.wav');
+    gameoverSound.play();
     openModal(gameoverModal);
-    // TODO: play sound
   }
 
   function congrats() {
     console.log('congrats func');
-    var allPieces = document.querySelectorAll('c-pieces__piece-img');
+    var allPieces = document.querySelectorAll('.c-pieces__piece-img');
     for (var i = 0; i < allPieces.length; i++) {
+      console.log('congrats loop');
       allPieces[i].classList.add('congrats-flip');
     }
   }
@@ -293,7 +263,7 @@
     console.log('right number ' + rightPieces);
 
     // pieces === 41 && nothing in storage area
-    if (rightPieces === 3) {
+    if (rightPieces === 41) {
       console.log('ALL are right');
       // dropZone.style.pointerEvents = 'none';
 
@@ -317,6 +287,8 @@
   startBtn.addEventListener('click', function() {
     startGame();
 
+    loadPieces();
+
     // start countdown timer
     var deadline = new Date(Date.parse(new Date()) + gameTime);
     countdownObj.start(deadline);
@@ -339,7 +311,6 @@
 
   continueBtn.addEventListener('click', function () {
     closeModal(pauseModal);
-    // TODO: add resume method
     countdownObj.resume();
   });
 
@@ -358,8 +329,6 @@
     window.location.reload(true);
   });
 
-  // TODO: start button call this func
-  window.addEventListener('load', loadPieces);
 
   dropZone.addEventListener('dragover', handleDragOver);
   dropZone.addEventListener('drop', handleDrop);

@@ -8,9 +8,9 @@
     background-color: transparent; } }
 @keyframes flip {
   from {
-    transform: rotateX(0); }
+    transform: rotateY(0); }
   to {
-    transform: rotateX(-360deg); } }
+    transform: rotateY(360deg); } }
 *, *::before, *::after {
   box-sizing: border-box; }
 
@@ -43,6 +43,8 @@ body {
   position: relative;
   font-size: inherit;
   width: 80%;
+  max-width: 1140px;
+  min-width: 1070px;
   margin: 0 auto;
   background-color: black;
   padding-bottom: 9em;
@@ -50,15 +52,17 @@ body {
 
 .l-puzzle {
   position: relative;
-  display: flex;
   display: none;
   justify-content: center;
   width: 100%; }
   .l-puzzle .l-puzzle__display {
     position: relative; }
-    .l-puzzle .l-puzzle__display img {
-      width: 868px;
-      height: 100%; }
+    .l-puzzle .l-puzzle__display .img--solved {
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: help;
+      visibility: hidden; }
   .l-puzzle .l-puzzle__control {
     display: flex;
     flex-flow: column;
@@ -71,13 +75,6 @@ body {
     .l-puzzle .l-puzzle__control .c-btn--hint {
       margin-top: 2em; }
 
-.img--solved {
-  position: absolute;
-  top: 0;
-  left: 0;
-  cursor: help;
-  visibility: hidden; }
-
 .l-timer {
   color: white; }
   .l-timer p {
@@ -87,10 +84,8 @@ body {
     font-size: 1.5em; }
 
 .l-pieces-storage {
-  color: white;
-  border: 3px dashed #e3526a;
+  margin-top: 2em;
   width: 100%;
-  display: flex;
   display: none;
   flex-wrap: wrap;
   align-items: center;
@@ -172,7 +167,6 @@ html, body {
   height: 100%;
   z-index: 100;
   background-color: black;
-  opacity: 0.6;
   opacity: 0;
   visibility: hidden;
   transition: visibility 0s, opacity 0.3s; }
@@ -192,7 +186,7 @@ html, body {
   pointer-events: none;
   min-width: 18em;
   width: 50%;
-  max-width: 35em;
+  max-width: 30em;
   min-height: 10em;
   background-color: #e6e6e6;
   transition: all 0.4s;
@@ -202,25 +196,35 @@ html, body {
     width: 100%; }
   .c-modal__body {
     margin: 0;
-    padding: 2.5em 3.5em;
+    padding: 2.5em 2em;
+    text-align: center;
     font-size: 0.9em;
     line-height: 2.5em;
     background-color: #e6e6e6; }
   .c-modal__footer {
     width: 100%;
-    padding: 1.5em;
+    padding: 1em 1.5em;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: #f4b7c1; }
+    .c-modal__footer .c-btn {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em; }
+
+.c-modal--pause .c-modal__footer {
+  flex-wrap: wrap;
+  align-content: space-between; }
 
 .c-modal--gameover,
 .c-modal--congrats .c-modal__body {
   font-size: 1.3em;
   text-align: center; }
 
-.c-modal--congrats .c-modal__body {
-  color: #e3526a; }
+.c-modal--congrats {
+  min-width: 25.5em; }
+  .c-modal--congrats .c-modal__body {
+    color: #e3526a; }
 
 /* Transition styles
    ========================================================================== */
@@ -241,6 +245,7 @@ html, body {
   justify-content: center; }
   .c-pieces--drop-zone .c-pieces__col {
     perspective: 1000px;
+    position: relative;
     width: 110px;
     display: flex;
     flex-flow: column;
@@ -256,11 +261,11 @@ html, body {
       margin: 1px;
       padding: 0;
       text-align: center; }
-    .c-pieces--drop-zone .c-pieces__col img {
+    .c-pieces--drop-zone .c-pieces__col .c-pieces__piece-img {
       width: 100%;
       height: auto; }
-    .c-pieces--drop-zone .c-pieces__col .congrats-flip {
-      animation: flip 1s forwards; }
+    .c-pieces--drop-zone .c-pieces__col .c-pieces__piece-img.congrats-flip {
+      animation: flip 1s 0.5s 2 forwards; }
     .c-pieces--drop-zone .c-pieces__col--odd {
       margin-left: -26px; }
     .c-pieces--drop-zone .c-pieces__col--odd:first-of-type {

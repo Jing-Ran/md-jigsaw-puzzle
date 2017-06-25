@@ -9,7 +9,6 @@
   height: 100%;
   z-index: 100;
   background-color: $color-black;
-  opacity: 0.6;
   opacity: 0;
   visibility: hidden;
   transition: visibility 0s, opacity 0.3s;
@@ -34,7 +33,7 @@
   pointer-events: none;
   min-width: 18em;
   width: 50%;
-  max-width: 35em;
+  max-width: 30em;
   min-height: 10em;
   background-color: darken($color-white, 10%);
 
@@ -48,7 +47,8 @@
 
   &__body {
     margin: 0;
-    padding: 2.5em 3.5em;
+    padding: 2.5em 2em;
+    text-align: center;
     font-size: 0.9em;
     line-height: 2.5em;
     background-color: darken($color-white, 10%);
@@ -56,14 +56,24 @@
 
   &__footer {
     width: 100%;
-    padding: 1.5em;
+    padding: 1em 1.5em;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: lighten($color-primary-lite, 7%);
+
+    .c-btn {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
   }
 }
 
+
+.c-modal--pause .c-modal__footer {
+  flex-wrap: wrap;
+  align-content: space-between;
+}
 
 .c-modal--gameover,
 .c-modal--congrats .c-modal__body {
@@ -71,10 +81,12 @@
   text-align: center;
 }
 
-.c-modal--congrats .c-modal__body {
-  color: $color-primary-dark;
+.c-modal--congrats {
+  min-width: 25.5em;
+  .c-modal__body {
+    color: $color-primary-dark;
+  }
 }
-
 
 /* Transition styles
    ========================================================================== */

@@ -13,6 +13,7 @@
 
   .c-pieces__col {
     perspective: 1000px;
+    position: relative;
 
     width: 110px;
     display: flex;
@@ -34,16 +35,15 @@
       text-align: center;
     }
 
-    img {
-      //transform: rotateX(-180deg);
-      //transition: transform 1s;
-
+    .c-pieces__piece-img {
       width: 100%;
       height: auto;
     }
 
-    .congrats-flip {
-      animation: flip 1s forwards;
+    // Add winning animation
+    .c-pieces__piece-img.congrats-flip {
+      //transform-origin: center;
+      animation: flip 1s 0.5s 2 forwards;
     }
 
     &--odd {
@@ -63,3 +63,7 @@
     }
   }
 }
+
+//.congrats-flip {
+//  animation: flip 1s forwards;
+//}

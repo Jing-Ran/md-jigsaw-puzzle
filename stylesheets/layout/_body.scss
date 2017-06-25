@@ -1,13 +1,11 @@
 .l-body {
-  //border: 1px solid yellow;
-
   position: relative;
   font-size: inherit;
   width: 80%;
+  max-width: 1140px;
+  min-width: 1070px;
   margin: 0 auto;
-  //padding: 1em;
   background-color: $color-black;
-  //overflow: hidden;
 
   padding-bottom: 9em;
   /* Height of the footer */
@@ -16,10 +14,7 @@
 
 // puzzle section in general
 .l-puzzle {
-  //border: 1px solid lightblue;
-
   position: relative;
-  display: flex;
   display: none;
   justify-content: center;
   width: 100%;
@@ -27,14 +22,16 @@
   .l-puzzle__display {
     position: relative;
 
-    img {
-      width: 868px;
-      height: 100%;
+    .img--solved {
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: help;
+      visibility: hidden;
     }
   }
 
   .l-puzzle__control {
-    //border: 1px solid red;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -53,17 +50,6 @@
     }
   }
 }
-
-// puzzle display
-.img--solved {
-  position: absolute;
-  top: 0;
-  left: 0;
-  cursor: help;
-
-  visibility: hidden;
-}
-
 
 
 // countdown timer
@@ -85,11 +71,8 @@
 
 // puzzle pieces section
 .l-pieces-storage {
-  color: white;
-
-  border: 3px dashed $color-primary-dark;
+  margin-top: 2em;
   width: 100%;
-  display: flex;
   display: none;
   flex-wrap: wrap;
   align-items: center;

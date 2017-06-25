@@ -14,9 +14,9 @@
 
 @keyframes flip {
   from {
-    transform: rotateX(0);
+    transform: rotateY(0);
   }
   to {
-    transform: rotateX(-360deg);
+    transform: rotateY(360deg);
   }
 }
