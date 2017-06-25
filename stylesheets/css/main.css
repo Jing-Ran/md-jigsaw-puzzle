@@ -313,7 +313,8 @@ html, body {
       text-transform: uppercase;
       color: #E97588;
       font-size: 1.7em;
-      line-height: 2.5em; }
+      line-height: 2.5em;
+      margin-bottom: 1.5em; }
   .c-splash__game--level .c-splash__level-control {
     display: flex;
     align-items: center;
