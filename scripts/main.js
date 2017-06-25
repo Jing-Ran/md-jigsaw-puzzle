@@ -200,8 +200,8 @@
   }
 
   function handleDrop(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    // e.preventDefault();
+    // e.stopPropagation();
     console.log('Drop ');
     // Get the data, which is the id of the DragStart target
     var targetId = e.dataTransfer.getData('text');
@@ -213,7 +213,8 @@
       // call calcRightPieces func
       calcRightPieces(e.target, targetId);
 
-    } else if (e.target.classList.contains('c-pieces__piece-img')) { // dropSpan not empty
+    } else if (e.target.classList.contains('c-pieces__piece-img') &&
+      targetId !== e.target.id) { // dropSpan not empty
       console.log('drop else if ' + e.target.id, e.dataTransfer.getData('text'));
       swapPieces(targetId, e.target);
     }
