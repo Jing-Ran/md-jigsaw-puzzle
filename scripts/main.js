@@ -182,12 +182,15 @@
 
   function handleDragStart(e) {
     console.log('drag start ' + e.target.id);
-    e.dataTransfer.setData('text/plain', e.target.id);
+    if (e.target.classList.contains('c-pieces__piece-img')) {
+      e.dataTransfer.setData('text/plain', e.target.id);
 
-    var startLocation = e.target.parentNode;
+      var startLocation = e.target.parentNode;
 
-    if (startLocation.classList.contains('c-pieces__piece'))
-      startZoneId = startLocation.id.substr(-3);
+      if (startLocation.classList.contains('c-pieces__piece'))
+        startZoneId = startLocation.id.substr(-3);
+    }
+
   }
 
   function handleDragOver(e) {
@@ -315,21 +318,22 @@
   });
 
   restartBtnPause.addEventListener('click', function () {
-    // closeModal(pauseModal);
+    closeModal(pauseModal);
     window.location.reload(true);
   });
 
   restartBtnGameover.addEventListener('click', function () {
-    // closeModal(pauseModal);
+    closeModal(pauseModal);
     window.location.reload(true);
   });
 
   restartBtnCong.addEventListener('click', function () {
-    // closeModal(pauseModal);
+    closeModal(pauseModal);
     window.location.reload(true);
   });
 
 
+  dropZone.addEventListener('dragstart', handleDragStart);
   dropZone.addEventListener('dragover', handleDragOver);
   dropZone.addEventListener('drop', handleDrop);
 })();
