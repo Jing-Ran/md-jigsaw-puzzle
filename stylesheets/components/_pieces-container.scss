@@ -1,6 +1,4 @@
 .c-pieces--drop-zone {
-  //border: 1px dashed lightblue;
-
   position: absolute;
   top: 0;
   left: 0;
@@ -25,8 +23,6 @@
     .c-pieces__piece {
       transform-style: preserve-3d;
       position: relative;
-
-      //border: 1px solid yellow;
       display: block;
       width: 100%;
       height: 95px;
@@ -42,13 +38,10 @@
 
     // Add winning animation
     .c-pieces__piece-img.congrats-flip {
-      //transform-origin: center;
       animation: flip 1s 0.5s 2 forwards;
     }
 
     &--odd {
-      //border: 1px solid yellow;
-      //height: 485px; // 95px * 5 + 10px
       margin-left: -26px;
     }
     &--odd:first-of-type {
@@ -56,14 +49,7 @@
     }
 
     &--even {
-      //border: 1px solid greenyellow;
-      //margin-top: 92px;
-      //height: 390px; // 95px * 4 + 10px
       margin-left: -26px;
     }
   }
 }
-
-//.congrats-flip {
-//  animation: flip 1s forwards;
-//}
