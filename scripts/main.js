@@ -1,4 +1,6 @@
 (function() {
+  'use strict';
+
   var gameLevelSwitch = document.querySelector('.c-switch');
   var gameLevel = document.querySelector('#game-level-cb');
   var gameLevelMsg = document.querySelector('.c-splash__msg');
