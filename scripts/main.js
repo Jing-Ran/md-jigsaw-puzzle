@@ -99,13 +99,13 @@
       gameTime = gameTimeHard;
       countdownTimer.innerHTML = '04:00';
       hintTimes.innerHTML = '';
-      hintBtn.disabled = 'true';
+      hintBtn.disabled = true;
     } else { // easy mode
       gameLevelMsg.innerHTML = '<span>easy mode</span>You will have 8 minutes & 3 hints to solve the puzzle.';
       gameTime = gameTimeEasy;
       countdownTimer.innerHTML = '08:00';
       hintTimes.innerHTML = '(3)';
-      hintBtn.disabled = 'false';
+      hintBtn.disabled = false;
     }
   }
   
