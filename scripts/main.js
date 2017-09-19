@@ -13,8 +13,8 @@
   var hintTimes = document.querySelector('.c-btn--hint .hint-times');
   var hintCount = 3;
   var countdownTimer = document.querySelector('.c-countdown');
-  var gameTimeEasy = 8 * 60 * 1000;
-  var gameTimeHard = 4 * 60 * 1000;
+  var gameTimeEasy = 10 * 60 * 1000;
+  var gameTimeHard = 5 * 60 * 1000;
   var gameTime = gameTimeEasy;
   var continueBtn = document.querySelector('.c-btn--continue');
   var restartBtnPause = document.querySelector('.c-modal--pause .c-btn--restart');
@@ -32,7 +32,7 @@
   var restartBtnCong = document.querySelector('.c-modal--congrats .c-btn--restart');
   var congratsModal = document.querySelector('.c-modal--congrats');
   var rightPieces = 0;
-  var startZoneId;
+  var startZoneId = '';
 
 
 
@@ -95,15 +95,17 @@
 
   function changeGameLevel() {
     if (gameLevel.checked) { // hard mode
-      gameLevelMsg.innerHTML = '<span>hard mode</span>You will have 4 minutes & NO hint to solve the puzzle. Good Luck!';
+      gameLevelMsg.innerHTML = '<span>hard mode</span>You will have 5 ' +
+        'minutes & NO hint to solve the puzzle. Good Luck!';
       gameTime = gameTimeHard;
-      countdownTimer.innerHTML = '04:00';
+      countdownTimer.innerHTML = '05:00';
       hintTimes.innerHTML = '';
       hintBtn.disabled = true;
     } else { // easy mode
-      gameLevelMsg.innerHTML = '<span>easy mode</span>You will have 8 minutes & 3 hints to solve the puzzle.';
+      gameLevelMsg.innerHTML = '<span>easy mode</span>You will have 10 ' +
+        'minutes & 3 hints to solve the puzzle.';
       gameTime = gameTimeEasy;
-      countdownTimer.innerHTML = '08:00';
+      countdownTimer.innerHTML = '10:00';
       hintTimes.innerHTML = '(3)';
       hintBtn.disabled = false;
     }
@@ -175,10 +177,11 @@
       var startLocation = e.target.parentNode;
       e.dataTransfer.setData('text/plain', e.target.id);
 
-      if (startLocation.classList.contains('c-pieces__piece'))
+      if (startLocation.classList.contains('c-pieces__piece')) {
         // if move a piece from one drop span to another
         // startZone indicates the previous drop span
         startZoneId = startLocation.id.substr(-3);
+      }
     }
   }
 
@@ -190,18 +193,24 @@
   function handleDrop(e) {
     e.preventDefault();
     e.stopPropagation();
-    // Get the data, which is the id of the DragStart target
+    // Get the data, which is the id of the DragStart target - the piece-img is
+    // being dragged
     var targetId = e.dataTransfer.getData('text');
 
     if (e.target.classList.contains('c-pieces__piece')) { // dropSpan is empty
+      // e.target is the dropSpan
       e.target.appendChild(document.getElementById(targetId));
 
       // call calcRightPieces func
       calcRightPieces(e.target, targetId);
     } else if (e.target.classList.contains('c-pieces__piece-img') &&
       targetId !== e.target.id)  { // dropSpan not empty
+      // e.target is piece-img
       swapPieces(targetId, e.target);
     }
+
+    // reset startZoneId - prevent it from taking prev value
+    startZoneId = '';
 
     // Clear the drag data cache (for all formats/types)
     e.dataTransfer.clearData();
@@ -235,7 +244,6 @@
       if (currentPieceId === startZoneId && prevPieceId === dropSpanId)
         rightPieces--;
     }
-    console.log('right number ' + rightPieces);
 
     // pieces === 41 && nothing in storage area
     if (rightPieces === 41) {
