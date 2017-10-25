@@ -1,48 +1,50 @@
 (function() {
   'use strict';
 
-  var gameLevelSwitch = document.querySelector('.c-switch');
-  var gameLevel = document.querySelector('#game-level-cb');
-  var gameLevelMsg = document.querySelector('.c-splash__msg');
-  var splash = document.querySelector('.c-splash');
-  var startBtn = document.querySelector('.c-btn--start');
-  var puzzleBoard = document.querySelector('.l-puzzle');
-  var hintImg = document.querySelector('.img--solved');
-  var pauseBtn = document.querySelector('.c-btn--pause');
-  var hintBtn = document.querySelector('.c-btn--hint');
-  var hintTimes = document.querySelector('.c-btn--hint .hint-times');
-  var hintCount = 3;
-  var countdownTimer = document.querySelector('.c-countdown');
-  var gameTimeEasy = 10 * 60 * 1000;
-  var gameTimeHard = 5 * 60 * 1000;
-  var gameTime = gameTimeEasy;
-  var continueBtn = document.querySelector('.c-btn--continue');
-  var restartBtnPause = document.querySelector('.c-modal--pause .c-btn--restart');
-  var pauseModal = document.querySelector('.c-modal--pause');
-  var overlay = document.querySelector('.c-modal-overlay');
-  var restartBtnGameover = document.querySelector('.c-modal--gameover .c-btn--restart');
-  var gameoverModal = document.querySelector('.c-modal--gameover');
-  var puzzlePieceArr = ['0-0', '0-1', '0-2', '0-3', '0-4', '1-0', '1-1', '1-2',
+  let gameLevelSwitch = document.querySelector('.c-switch');
+  let gameLevel = document.querySelector('#game-level-cb');
+  let gameLevelMsg = document.querySelector('.c-splash__msg');
+  let splash = document.querySelector('.c-splash');
+  let startBtn = document.querySelector('.c-btn--start');
+  let puzzleBoard = document.querySelector('.l-puzzle');
+  let hintImg = document.querySelector('.img--solved');
+  let pauseBtn = document.querySelector('.c-btn--pause');
+  let hintBtn = document.querySelector('.c-btn--hint');
+  let hintTimes = document.querySelector('.c-btn--hint .hint-times');
+  let hintCount = 3;
+  let countdownTimer = document.querySelector('.c-countdown');
+  let gameTimeEasy = 10 * 60 * 1000;
+  let gameTimeHard = 5 * 60 * 1000;
+  let gameTime = gameTimeEasy;
+  let continueBtn = document.querySelector('.c-btn--continue');
+  let restartBtnPause = document.querySelector('.c-modal--pause .c-btn--restart');
+  let pauseModal = document.querySelector('.c-modal--pause');
+  let overlay = document.querySelector('.c-modal-overlay');
+  let restartBtnGameover = document.querySelector('.c-modal--gameover' +
+    ' .c-btn--restart');
+  let gameoverModal = document.querySelector('.c-modal--gameover');
+  let puzzlePieceArr = ['0-0', '0-1', '0-2', '0-3', '0-4', '1-0', '1-1', '1-2',
     '1-3', '2-0', '2-1', '2-2', '2-3', '2-4', '3-0', '3-1', '3-2', '3-3',
     '4-0', '4-1', '4-2', '4-3', '4-4', '5-0', '5-1', '5-2', '5-3', '6-0',
     '6-1', '6-2', '6-3', '6-4', '7-0', '7-1', '7-2', '7-3', '8-0', '8-1',
     '8-2', '8-3', '8-4'];
-  var piecesStorage = document.querySelector('.l-pieces-storage');
-  var dropZone = document.querySelector('.c-pieces--drop-zone');
-  var restartBtnCong = document.querySelector('.c-modal--congrats .c-btn--restart');
-  var congratsModal = document.querySelector('.c-modal--congrats');
-  var rightPieces = 0;
-  var startZoneId = '';
+  let piecesStorage = document.querySelector('.l-pieces-storage');
+  let dropZone = document.querySelector('.c-pieces--drop-zone');
+  let restartBtnCong = document.querySelector('.c-modal--congrats' +
+    ' .c-btn--restart');
+  let congratsModal = document.querySelector('.c-modal--congrats');
+  let rightPieces = 0;
+  let startZoneId = '';
 
 
 
   // Countdown object
-  var countdownObj = {
-    start: function(endTime) {
-      var self = this;
-      var timeLeft = Date.parse(endTime) - Date.parse(new Date());
-      var seconds = Math.floor((timeLeft/1000) % 60);
-      var minutes = Math.floor((timeLeft/1000/60) % 60);
+  let countdownObj = {
+    start(endTime) {
+      let self = this;
+      let timeLeft = Date.parse(endTime) - Date.parse(new Date());
+      let seconds = Math.floor((timeLeft/1000) % 60);
+      let minutes = Math.floor((timeLeft/1000/60) % 60);
 
       // Update Timer UI
       countdownTimer.innerHTML = ('0' + minutes).slice(-2) + ':' +
@@ -58,20 +60,20 @@
         return false;
       }
 
-      this.timeout = window.setTimeout(function() {
+      this.timeout = window.setTimeout(() => {
         self.gameTimeLeft = timeLeft;
         self.start(endTime);
       }, 1000);
     },
 
-    pause: function() {
+    pause() {
       clearTimeout(this.timeout);
       delete this.timeout;
     },
 
-    resume: function () {
+    resume() {
       if (!this.timeout) {
-        var newDeadline = new Date(this.gameTimeLeft + Date.parse(new Date()) - 1000);
+        let newDeadline = new Date(this.gameTimeLeft + Date.parse(new Date()) - 1000);
         this.start(newDeadline);
       }
     }
@@ -95,15 +97,13 @@
 
   function changeGameLevel() {
     if (gameLevel.checked) { // hard mode
-      gameLevelMsg.innerHTML = '<span>hard mode</span>You will have 5 ' +
-        'minutes & NO hint to solve the puzzle. Good Luck!';
+      gameLevelMsg.innerHTML = `<span>hard mode</span>You will have 5 minutes & NO hint to solve the puzzle. Good Luck!`;
       gameTime = gameTimeHard;
       countdownTimer.innerHTML = '05:00';
       hintTimes.innerHTML = '';
       hintBtn.disabled = true;
     } else { // easy mode
-      gameLevelMsg.innerHTML = '<span>easy mode</span>You will have 10 ' +
-        'minutes & 3 hints to solve the puzzle.';
+      gameLevelMsg.innerHTML = `<span>easy mode</span>You will have 10 minutes & 3 hints to solve the puzzle.`;
       gameTime = gameTimeEasy;
       countdownTimer.innerHTML = '10:00';
       hintTimes.innerHTML = '(3)';
@@ -121,7 +121,7 @@
     // show hint image
     hintImg.style.visibility = 'visible';
     // update times of hint
-    hintTimes.innerHTML = '(' + --hintCount + ')';
+    hintTimes.innerHTML = `(${--hintCount})`;
   }
   
   function hideHint() {
@@ -133,27 +133,26 @@
 
 
   function gameOver() {
-    var gameoverSound = new Audio('assets/sound/gameover.wav');
+    let gameoverSound = new Audio('assets/sound/gameover.wav');
     gameoverSound.play();
     openModal(gameoverModal);
   }
 
   function congrats() {
-    var allPieces = document.querySelectorAll('.c-pieces__piece-img');
-    for (var i = 0; i < allPieces.length; i++) {
-      allPieces[i].classList.add('congrats-flip');
+    let allPieces = document.querySelectorAll('.c-pieces__piece-img');
+    for (let piece of allPieces) {
+      piece.classList.add('congrats-flip');
     }
   }
 
 
 
   function loadPieces() {
-    var shuffledArr = shufflePieces(puzzlePieceArr);
-    var newImg;
-    for (var i = 0; i < shuffledArr.length; i++) {
-      newImg = document.createElement('img');
-      newImg.setAttribute('src', 'assets/images/' + shuffledArr[i] + '.png');
-      newImg.setAttribute('id', shuffledArr[i]);
+    const SHUFFLED_ARR = shufflePieces(puzzlePieceArr);
+    for (let piece of SHUFFLED_ARR) {
+      let newImg = document.createElement('img');
+      newImg.setAttribute('src', `assets/images/${piece}.png`);
+      newImg.setAttribute('id', piece);
       newImg.classList.add('c-pieces__piece-img');
       newImg.setAttribute('draggable', 'true');
       newImg.addEventListener('dragstart', handleDragStart);
@@ -162,9 +161,9 @@
   }
 
   function shufflePieces(arr) {
-    for (var i = arr.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var temp = arr[i];
+    for (let i = arr.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      let temp = arr[i];
       arr[i] = arr[j];
       arr[j] = temp;
     }
@@ -174,13 +173,13 @@
 
   function handleDragStart(e) {
     if (e.target.classList.contains('c-pieces__piece-img')) {
-      var startLocation = e.target.parentNode;
+      const START_LOCATION = e.target.parentNode;
       e.dataTransfer.setData('text/plain', e.target.id);
 
-      if (startLocation.classList.contains('c-pieces__piece')) {
+      if (START_LOCATION.classList.contains('c-pieces__piece')) {
         // if move a piece from one drop span to another
         // startZone indicates the previous drop span
-        startZoneId = startLocation.id.substr(-3);
+        startZoneId = START_LOCATION.id.substr(-3);
       }
     }
   }
@@ -195,18 +194,18 @@
     e.stopPropagation();
     // Get the data, which is the id of the DragStart target - the piece-img is
     // being dragged
-    var targetId = e.dataTransfer.getData('text');
+    const TARGET_ID = e.dataTransfer.getData('text');
 
     if (e.target.classList.contains('c-pieces__piece')) { // dropSpan is empty
       // e.target is the dropSpan
-      e.target.appendChild(document.getElementById(targetId));
+      e.target.appendChild(document.getElementById(TARGET_ID));
 
       // call calcRightPieces func
-      calcRightPieces(e.target, targetId);
+      calcRightPieces(e.target, TARGET_ID);
     } else if (e.target.classList.contains('c-pieces__piece-img') &&
-      targetId !== e.target.id)  { // dropSpan not empty
+      TARGET_ID !== e.target.id)  { // dropSpan not empty
       // e.target is piece-img
-      swapPieces(targetId, e.target);
+      swapPieces(TARGET_ID, e.target);
     }
 
     // reset startZoneId - prevent it from taking prev value
@@ -218,9 +217,9 @@
 
 
   function swapPieces(newPieceId, oldPiece) {
-    var newPiece = document.getElementById(newPieceId);
-    var dropSpan = oldPiece.parentNode;
-    dropSpan.replaceChild(newPiece, oldPiece);
+    const NEW_PIECE = document.getElementById(newPieceId);
+    let dropSpan = oldPiece.parentNode;
+    dropSpan.replaceChild(NEW_PIECE, oldPiece);
     piecesStorage.appendChild(oldPiece);
 
     // recalculate number of right pieces
@@ -230,18 +229,18 @@
 
   // call this func when a piece is dropped
   function calcRightPieces(dropSpan, currentPieceId, prevPieceId) {
-    var dropSpanId = dropSpan.id.substr(-3);
+    const DROP_SPAN_ID = dropSpan.id.substr(-3);
 
-    if (dropSpanId === currentPieceId) {
+    if (DROP_SPAN_ID === currentPieceId) {
       rightPieces++;
     } else {
       // if previous piece was in the right span -- current piece is wrong
       // OR if current piece was right and is moving to a wrong span
-      if (prevPieceId === dropSpanId || currentPieceId === startZoneId)
+      if (prevPieceId === DROP_SPAN_ID || currentPieceId === startZoneId)
         rightPieces--;
 
       // if both previous and current were in right spans, and they are exchanged
-      if (currentPieceId === startZoneId && prevPieceId === dropSpanId)
+      if (currentPieceId === startZoneId && prevPieceId === DROP_SPAN_ID)
         rightPieces--;
     }
 
@@ -268,44 +267,34 @@
 
   gameLevelSwitch.addEventListener('click', changeGameLevel);
 
-  startBtn.addEventListener('click', function() {
+  startBtn.addEventListener('click', () => {
+    const DEADLINE = new Date(Date.parse(new Date()) + gameTime);
     startGame();
     loadPieces();
 
     // start countdown timer
-    var deadline = new Date(Date.parse(new Date()) + gameTime);
-    countdownObj.start(deadline);
+    countdownObj.start(DEADLINE);
   });
 
-  hintBtn.addEventListener('mousedown', function() {
-    showHint();
-  });
+  hintBtn.addEventListener('mousedown', showHint);
 
-  hintBtn.addEventListener('mouseup', function() {
-    hideHint();
-  });
+  hintBtn.addEventListener('mouseup', hideHint);
 
-  pauseBtn.addEventListener('click', function () {
+  pauseBtn.addEventListener('click', () => {
     countdownObj.pause();
     openModal(pauseModal);
   });
 
-  continueBtn.addEventListener('click', function () {
+  continueBtn.addEventListener('click', () => {
     closeModal(pauseModal);
     countdownObj.resume();
   });
 
-  restartBtnPause.addEventListener('click', function () {
-    restartGame(pauseModal);
-  });
+  restartBtnPause.addEventListener('click', () => restartGame(pauseModal));
 
-  restartBtnGameover.addEventListener('click', function () {
-    restartGame(gameoverModal);
-  });
+  restartBtnGameover.addEventListener('click', () => restartGame(gameoverModal));
 
-  restartBtnCong.addEventListener('click', function () {
-    restartGame(congratsModal);
-  });
+  restartBtnCong.addEventListener('click', () => restartGame(congratsModal));
 
   dropZone.addEventListener('dragover', handleDragOver);
   dropZone.addEventListener('drop', handleDrop);
