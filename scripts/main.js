@@ -36,8 +36,6 @@
   let rightPieces = 0;
   let startZoneId = '';
 
-
-
   // Countdown object
   let countdownObj = {
     start(endTime) {
@@ -47,8 +45,8 @@
       let minutes = Math.floor((timeLeft/1000/60) % 60);
 
       // Update Timer UI
-      countdownTimer.innerHTML = ('0' + minutes).slice(-2) + ':' +
-        ('0' + seconds).slice(-2);
+      countdownTimer.innerHTML =
+        `${(`0${minutes}`).slice(-2)}:${(`0${seconds}`).slice(-2)}`;
 
       // 1 min left - change to warning color
       if (timeLeft <= 60000) countdownTimer.style.color = 'red';
@@ -60,6 +58,7 @@
         return false;
       }
 
+      // this refers to the countdownObj
       this.timeout = window.setTimeout(() => {
         self.gameTimeLeft = timeLeft;
         self.start(endTime);
@@ -149,15 +148,18 @@
 
   function loadPieces() {
     const SHUFFLED_ARR = shufflePieces(puzzlePieceArr);
-    for (let piece of SHUFFLED_ARR) {
-      let newImg = document.createElement('img');
-      newImg.setAttribute('src', `assets/images/${piece}.png`);
-      newImg.setAttribute('id', piece);
-      newImg.classList.add('c-pieces__piece-img');
-      newImg.setAttribute('draggable', 'true');
-      newImg.addEventListener('dragstart', handleDragStart);
-      piecesStorage.appendChild(newImg);
-    }
+    let fragment = document.createDocumentFragment();
+    let imgElement = document.createElement('img');
+    SHUFFLED_ARR.forEach(function (piece) {
+        let newImg = imgElement.cloneNode();
+        newImg.setAttribute('src', `assets/images/${piece}.png`);
+        newImg.setAttribute('id', piece);
+        newImg.classList.add('c-pieces__piece-img');
+        newImg.setAttribute('draggable', 'true');
+        newImg.addEventListener('dragstart', handleDragStart);
+        fragment.appendChild(newImg);
+    });
+    piecesStorage.appendChild(fragment);
   }
 
   function shufflePieces(arr) {
