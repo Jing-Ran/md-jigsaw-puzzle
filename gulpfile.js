@@ -7,7 +7,7 @@ let jasmine = require('gulp-jasmine');
 let minifyCss = require('gulp-clean-css');
 let concat = require('gulp-concat');
 let rename = require('gulp-rename');
-let uglifyJs = require('gulp-uglify');
+let uglifyJs = require('gulp-uglify-es').default;
 let imagemin = require('gulp-imagemin');
 
 function handleError(error) {
@@ -31,27 +31,19 @@ gulp.task('lint', function () {
 // compile sass task
 gulp.task('sass', function () {
   console.log('Compiling Sass');
-  return gulp.src('stylesheets/*/*.scss')
+  return gulp.src('stylesheets/**/*.scss')
     .pipe(sass()).on('error', handleError)
     .pipe(gulp.dest('stylesheets/css/'));
 });
 
 // watch sass changes
 gulp.task('watch', function () {
-  gulp.watch('app/sass/*.scss', ['sass']);
-});
-
-// Jasmine
-gulp.task('jasmine', function () {
-  gulp.src('app/js/*.js')
-    .pipe(jasmine({
-      errorOnFail: true
-    }));
+  gulp.watch('stylesheets/**/*.scss', ['sass']);
 });
 
 // Concatenate and minify compiled css files
 gulp.task('optimize-css', function () {
-  return gulp.src('app/css/*.css')
+  return gulp.src('stylesheets/css/main.css')
     .pipe(concat('main.min.css')).on('error', handleError)
     .pipe(minifyCss()).on('error', handleError)
     .pipe(gulp.dest('dist'));
@@ -59,9 +51,9 @@ gulp.task('optimize-css', function () {
 
 // Concatenate and minify JS files
 gulp.task('optimize-js', function () {
-  return gulp.src('app/js/*.js')
-    .pipe(concat('scripts.js')).on('error', handleError)
-    .pipe(rename('scripts.min.js'))
+  return gulp.src('scripts/*.js')
+    .pipe(concat('main.js')).on('error', handleError)
+    .pipe(rename('main.min.js'))
     .pipe(uglifyJs()).on('error', handleError)
     .pipe(gulp.dest('dist'));
 });
