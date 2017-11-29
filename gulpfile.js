@@ -22,15 +22,8 @@ gulp.task('default', function () {
 
 // jshint task - lint js
 gulp.task('lint', function () {
-  return gulp.src('app/js/*.js')
-    .pipe(jshint({
-      undef: true,
-      globals: {
-        module: true,
-        require: true,
-        console: true
-      }
-    }))
+  return gulp.src('scripts/main.js')
+    .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail')); // Stops running if any error exists
 });
@@ -38,9 +31,9 @@ gulp.task('lint', function () {
 // compile sass task
 gulp.task('sass', function () {
   console.log('Compiling Sass');
-  return gulp.src('app/sass/*.scss')
+  return gulp.src('stylesheets/*/*.scss')
     .pipe(sass()).on('error', handleError)
-    .pipe(gulp.dest('app/css'));
+    .pipe(gulp.dest('stylesheets/css/'));
 });
 
 // watch sass changes
