@@ -60,7 +60,7 @@ gulp.task('optimize-js', function () {
 
 // Minify images
 gulp.task('optimize-img', function () {
-  return gulp.src('app/img/*')
+  return gulp.src('assets/images/*')
     .pipe(imagemin()).on('error', handleError)
     .pipe(gulp.dest('dist/img'));
 });

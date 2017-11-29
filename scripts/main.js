@@ -152,7 +152,7 @@
     let imgElement = document.createElement('img');
     SHUFFLED_ARR.forEach(function (piece) {
         let newImg = imgElement.cloneNode();
-        newImg.setAttribute('src', `assets/images/${piece}.png`);
+        newImg.setAttribute('src', `dist/img/${piece}.png`);
         newImg.setAttribute('id', piece);
         newImg.classList.add('c-pieces__piece-img');
         newImg.setAttribute('draggable', 'true');
